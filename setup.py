@@ -1,6 +1,7 @@
 from setuptools import setup, Extension, find_packages
 import platform
 import os
+import sys
 
 # Configurações específicas por plataforma
 if platform.system() == "Windows":
@@ -8,11 +9,13 @@ if platform.system() == "Windows":
     extra_compile_args = ["/std:c++17", "/O2"]
     define_macros = [("NDEBUG", None)]
     libraries = []
-else:
+    include_dirs = ["./mapper/includes/win"]
+elif platform.system() == "Linux":
     # Linux/Unix
     extra_compile_args = ["-std=c++17", "-fPIC", "-O3", "-march=native", "-ffast-math"]
     define_macros = [("NDEBUG", None)]
     libraries = []
+    include_dirs = ["./mapper/includes/linux"]
 
 # Configuração da extensão C++
 mapper_extension = Extension(
@@ -22,6 +25,7 @@ mapper_extension = Extension(
         "mapper/mapping_fields.cpp", 
         "mapper/flattener.cpp"
     ],
+    include_dirs=include_dirs,
     extra_compile_args=extra_compile_args,
     define_macros=define_macros,
     libraries=libraries,
@@ -31,11 +35,11 @@ mapper_extension = Extension(
 # Configuração do setup
 setup(
     name="mapper-lib",
-    version="1.0.0",
+    version="1.0.3",  # Increment version to avoid conflicts
     description="Uma biblioteca C++ para mapeamento e transformação de dados",
-    author="Seu Nome",
-    author_email="seu.email@exemplo.com",
-    url="https://github.com/seu-usuario/mapper-lib",
+    author="Gustavo de Oliveira",
+    author_email="devops15@compresuapeca.com.br",
+    url="https://github.com/compre-sua-peca/csp_mapper",
     packages=find_packages(),
     py_modules=["main"],
     ext_modules=[mapper_extension],
@@ -57,7 +61,7 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     keywords="mapping, data transformation, c++, performance",
-    long_description=open("README.md").read() if os.path.exists("README.md") else "Uma biblioteca C++ para mapeamento e transformação de dados",
+    long_description=open("README.md", encoding="utf-8").read() if os.path.exists("README.md") else "Uma biblioteca C++ para mapeamento e transformação de dados",
     long_description_content_type="text/markdown",
     include_package_data=True,
     zip_safe=False,

@@ -1,18 +1,18 @@
 [build-system]
-requires = ["setuptools>=45", "wheel", "pybind11>=2.0.0"]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "mapper-lib"
-version = "1.0.0"
+version = "1.0.3"
 description = "Uma biblioteca C++ para mapeamento e transformação de dados"
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
-    {name = "Seu Nome", email = "seu.email@exemplo.com"}
+    {name = "Gustavo de Oliveira", email = "devops15@compresuapeca.com.br"}
 ]
 maintainers = [
-    {name = "Seu Nome", email = "seu.email@exemplo.com"}
+    {name = "Compre Sua Peça", email = "devops4@compresuapeca.com.br"}
 ]
 keywords = ["mapping", "data transformation", "c++", "performance"]
 classifiers = [
@@ -34,13 +34,16 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/seu-usuario/mapper-lib"
-Repository = "https://github.com/seu-usuario/mapper-lib"
-Issues = "https://github.com/seu-usuario/mapper-lib/issues"
+Homepage = "https://github.com/compre-sua-peca/csp_mapper"
+Repository = "https://github.com/compre-sua-peca/csp_mapper"
+Issues = "https://github.com/compre-sua-peca/csp_mapper/issues"
 
 [tool.setuptools]
 packages = ["mapper"]
 py-modules = ["main"]
 
 [tool.setuptools.package-data]
-"*" = ["*.so", "*.pyd", "*.dll", "*.dylib"]
+mapper = ["*.py", "*.cpp", "*.h"]
+
+[tool.wheel]
+universal = false
