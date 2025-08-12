@@ -27,13 +27,6 @@ jobs:
     - name: Build wheels
       run: python -m cibuildwheel --output-dir dist
       env:
-        CIBW_BUILD: ${{ 
-          matrix.python-version == '3.8' && 'cp38-*' || 
-          matrix.python-version == '3.9' && 'cp39-*' || 
-          matrix.python-version == '3.10' && 'cp310-*' || 
-          matrix.python-version == '3.11' && 'cp311-*' || 
-          matrix.python-version == '3.12' && 'cp312-*' 
-        }}
         CIBW_SKIP: "pp*"
         CIBW_ARCHS: "auto64"
 
