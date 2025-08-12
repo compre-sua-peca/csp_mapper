@@ -281,7 +281,7 @@ For support and questions:
 
 ## 🔄 Version History
 
-- **v1.0.3** - Current version with cross-platform support
+- **v1.0.4** - Current version with cross-platform support
 - **v1.0.1** - Performance improvements
 - **v1.0.0** - Initial release
 
