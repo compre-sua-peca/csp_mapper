@@ -16,79 +16,14 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Debug - Job Info
-      run: echo "=== BUILD DEBUG INFO ==="
-      
-    - name: Debug - OS Info
-      run: echo "OS: ${{ matrix.os }}"
-      
-    - name: Debug - Python Version
-      run: echo "Python Version: ${{ matrix.python-version }}"
-      
-    - name: Debug - Runner Info
-      run: echo "Runner: ${{ runner.os }}"
-      
-    - name: Debug - Architecture
-      run: echo "Architecture: ${{ runner.arch }}"
-      
-    - name: Debug - Git Ref
-      run: echo "GitHub Ref: ${{ github.ref }}"
-      
-    - name: Debug - Git SHA
-      run: echo "GitHub SHA: ${{ github.sha }}"
-      
-    - name: Debug - Event Type
-      run: echo "Event Name: ${{ github.event_name }}"
-
-    - name: Debug - Working Directory
-      run: echo "Working Directory: $(pwd)"
-
-    - name: Debug - Repository Contents
-      run: ls -la
-
-    - name: Debug - Git Status
-      run: git status
-
-    - name: Debug - Git Log
-      run: git log --oneline -3
-
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
 
-    - name: Debug - Python Version Check
-      run: python --version
-
-    - name: Debug - Python Location
-      run: which python
-
-    - name: Debug - Pip Version
-      run: pip --version
-
-    - name: Debug - Python Path
-      run: python -c "import sys; print('\n'.join(sys.path))"
 
     - name: Install cibuildwheel
       run: python -m pip install --upgrade pip cibuildwheel
-
-    - name: Debug - Installed Packages
-      run: pip list
-
-    - name: Debug - Cibuildwheel Version
-      run: python -m cibuildwheel --version
-
-    - name: Debug - Environment Variables
-      run: env | sort
-
-    - name: Debug - Disk Space
-      run: df -h
-
-    - name: Debug - Memory Info
-      run: free -h || echo "Memory info not available on this platform"
-
-    - name: Debug - CPU Info
-      run: nproc || echo "CPU info not available on this platform"
 
     - name: Build wheels
       run: python -m cibuildwheel --output-dir dist
@@ -97,28 +32,10 @@ jobs:
         CIBW_SKIP: "pp*"
         CIBW_ARCHS: "auto64"
 
-    - name: Debug - Dist Directory Contents
-      run: find dist/ -type f -exec ls -la {} \;
-
-    - name: Debug - Dist Directory Structure
-      run: tree dist/ || find dist/ -type d | sort
-
-    - name: Debug - Wheel Files
-      run: find dist/ -name "*.whl" -exec ls -la {} \;
-
-    - name: Debug - Source Distributions
-      run: find dist/ -name "*.tar.gz" -exec ls -la {} \;
-
-    - name: Debug - Total Artifacts
-      run: find dist/ -type f | wc -l
-
     - uses: actions/upload-artifact@v4
       with:
         name: dist-${{ matrix.os }}-${{ matrix.python-version }}
         path: dist/
-
-    - name: Debug - Artifact Upload Complete
-      run: echo "Artifact upload completed: dist-${{ matrix.os }}-${{ matrix.python-version }}"
 
   deploy:
     needs: build-wheels
@@ -126,70 +43,22 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Debug - Deploy Job Start
-      run: echo "=== DEPLOY DEBUG INFO ==="
-
-    - name: Debug - Deploy Runner
-      run: echo "Runner: ${{ runner.os }}"
-
-    - name: Debug - Deploy Architecture
-      run: echo "Architecture: ${{ runner.arch }}"
-
-    - name: Debug - Deploy Git Ref
-      run: echo "GitHub Ref: ${{ github.ref }}"
-
-    - name: Debug - Deploy Git SHA
-      run: echo "GitHub SHA: ${{ github.sha }}"
-
-    - name: Debug - Deploy Event
-      run: echo "Event Name: ${{ github.event_name }}"
-
-    - name: Debug - Deploy Working Directory
-      run: echo "Working Directory: $(pwd)"
-
-    - name: Debug - Deploy Repository Contents
-      run: ls -la
+    - name: Status - Starting Deploy Process
+      run: echo "🚀 Starting deployment process..."
 
     - name: Download all build artifacts
       uses: actions/download-artifact@v4
       with:
         path: dist/
 
-    - name: Debug - Downloaded Directory
-      run: ls -la dist/
-
-    - name: Debug - All Artifacts
-      run: find dist/ -type f -exec ls -la {} \;
-
-    - name: Debug - Artifact Count
-      run: find dist/ -type f | wc -l
-
-    - name: Debug - Wheel Count
-      run: find dist/ -name "*.whl" | wc -l
-
-    - name: Debug - Source Distribution Count
-      run: find dist/ -name "*.tar.gz" | wc -l
+    - name: Status - Artifacts Downloaded
+      run: echo "✅ Build artifacts downloaded successfully"
 
     - name: Install Twine
       run: python -m pip install --upgrade twine
 
-    - name: Debug - Twine Version
-      run: twine --version
-
-    - name: Debug - Deploy Python Version
-      run: python --version
-
-    - name: Debug - Deploy Pip Version
-      run: pip --version
-
-    - name: Debug - PyPI Username Status
-      run: echo "TWINE_USERNAME: SET"
-
-    - name: Debug - PyPI Password Status
-      run: echo "TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN != '' && 'SET' || 'NOT SET' }}"
-
-    - name: Debug - PyPI Token Length
-      run: echo "PyPI Token Length: ${{ length(secrets.PYPI_API_TOKEN) }}"
+    - name: Status - Ready for PyPI Upload
+      run: echo "📦 Twine installed, starting PyPI upload..."
 
     - name: Publish to PyPI
       run: twine upload dist/*/*.whl dist/*/*.tar.gz
@@ -197,8 +66,8 @@ jobs:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
 
-    - name: Debug - Upload Complete
-      run: echo "Upload completed successfully"
+    - name: Status - Deploy Complete
+      run: echo "🎉 Deployment completed successfully!"
 
     - name: Debug - Files Uploaded
       run: find dist/ -name "*.whl" -o -name "*.tar.gz" | sort
