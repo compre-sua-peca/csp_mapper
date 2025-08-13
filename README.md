@@ -29,8 +29,7 @@ A high-performance Python library for data mapping and transformation, built wit
 ### Installation via pip
 
 ```bash
-pip install -r requirements.txt
-pip install -e .
+pip install mapper-lib
 ```
 
 ### Manual installation
@@ -281,7 +280,8 @@ For support and questions:
 
 ## 🔄 Version History
 
-- **v1.0.6** - Current version with cross-platform support
+- **v1.0.7** - Current version with cross-platform support
+- **v1.0.6** - Previous version with cross-platform support
 - **v1.0.1** - Performance improvements
 - **v1.0.0** - Initial release
 

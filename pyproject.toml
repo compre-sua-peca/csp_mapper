@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mapper-lib"
-version = "1.0.6"
-description = "Uma biblioteca C++ para mapeamento e transformação de dados"
+version = "1.0.7"
+description = "A C++ library for data mapping and transformation"
 readme = "README.md"
 license = {text = "MIT"}
 authors = [

@@ -35,7 +35,7 @@ mapper_extension = Extension(
 # Configuração do setup
 setup(
     name="mapper-lib",
-    version="1.0.6",  # Increment version to avoid conflicts
+    version="1.0.7",  # Increment version to avoid conflicts
     description="A C++ library for data mapping and transformation",
     author="Gustavo de Oliveira",
     author_email="devops15@compresuapeca.com.br",
