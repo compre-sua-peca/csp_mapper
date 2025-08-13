@@ -35,13 +35,15 @@ mapper_extension = Extension(
 # Configuração do setup
 setup(
     name="mapper-lib",
-    version="1.0.4",  # Increment version to avoid conflicts
-    description="Uma biblioteca C++ para mapeamento e transformação de dados",
+    version="1.0.6",  # Increment version to avoid conflicts
+    description="A C++ library for data mapping and transformation",
     author="Gustavo de Oliveira",
     author_email="devops15@compresuapeca.com.br",
     url="https://github.com/compre-sua-peca/csp_mapper",
     packages=find_packages(),
-    py_modules=["main"],
+    package_data={
+        "mapper": ["*.pyi", "py.typed"],
+    },
     ext_modules=[mapper_extension],
     install_requires=[
         "pybind11>=2.0.0",
@@ -61,7 +63,7 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     keywords="mapping, data transformation, c++, performance",
-    long_description=open("README.md", encoding="utf-8").read() if os.path.exists("README.md") else "Uma biblioteca C++ para mapeamento e transformação de dados",
+    long_description=open("README.md", encoding="utf-8").read() if os.path.exists("README.md") else "A C++ library for data mapping and transformation",
     long_description_content_type="text/markdown",
     include_package_data=True,
     zip_safe=False,

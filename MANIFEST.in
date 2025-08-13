@@ -1,0 +1,22 @@
+# Include type stub files
+include mapper/*.pyi
+include mapper/py.typed
+
+# Include source files
+include mapper/*.py
+include mapper/*.cpp
+include mapper/*.h
+
+# Include configuration files
+include README.md
+include LICENSE
+include pyproject.toml
+
+# Include headers if any
+recursive-include mapper/includes *
+
+# Exclude compiled files and cache
+global-exclude *.pyc
+global-exclude __pycache__
+global-exclude *.so
+global-exclude *.pyd

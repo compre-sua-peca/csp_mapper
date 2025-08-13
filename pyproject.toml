@@ -1,10 +1,10 @@
 [build-system]
-requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+requires = ["setuptools>=45", "wheel", "pybind11>=2.0.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "mapper-lib"
-version = "1.0.4"
+version = "1.0.6"
 description = "Uma biblioteca C++ para mapeamento e transformação de dados"
 readme = "README.md"
 license = {text = "MIT"}
@@ -43,7 +43,7 @@ packages = ["mapper"]
 py-modules = ["main"]
 
 [tool.setuptools.package-data]
-mapper = ["*.py", "*.cpp", "*.h"]
+mapper = ["*.py", "*.pyi", "py.typed", "*.cpp", "*.h"]
 
 [tool.wheel]
 universal = false
