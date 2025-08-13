@@ -17,7 +17,7 @@ std::map<std::string, std::any> mapping_fields(
     const std::string& sep = "|"
 );
 
-std::map<std::string, std::any> map_dic(
+std::map<std::string, std::any> map_dict(
     const std::map<std::string, std::any>& input_map,
     const std::map<std::string, std::string>& map_fields,
     const std::string& sep, 
@@ -296,7 +296,7 @@ static PyObject* py_map_dict(PyObject* self, PyObject* args) {
     
     // Parse arguments: (input_map_dict, map_fields_dict, sep="|", parent_key="")
     if (!PyArg_ParseTuple(args, "OO|ss", &input_map, &map_fields, &sep, &parent_key)) {
-        PyErr_SetString(PyExc_TypeError, "map_dic() expects two dicts and optional sep and parent_key strings");
+        PyErr_SetString(PyExc_TypeError, "map_dict() expects two dicts and optional sep and parent_key strings");
         return nullptr;
     }
     
@@ -311,8 +311,8 @@ static PyObject* py_map_dict(PyObject* self, PyObject* args) {
         auto cpp_input_map = py_dict_to_cpp_map(input_map);
         auto cpp_map_fields = py_dict_to_cpp_string_map(map_fields);
         
-        // Call the C++ map_dic function
-        auto result_map = map_dic(cpp_input_map, cpp_map_fields, std::string(sep), std::string(parent_key));
+        // Call the C++ map_dict function
+        auto result_map = map_dict(cpp_input_map, cpp_map_fields, std::string(sep), std::string(parent_key));
         
         // Convert result back to Python dict
         PyObject* result = cpp_map_to_py_dict(result_map);
