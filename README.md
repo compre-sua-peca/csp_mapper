@@ -109,7 +109,7 @@ input_data = {
 }
 
 # Mapping using configuration file
-result = mapper_instance.map_dic(
+result = mapper_instance.map_dict(
     input_dict=input_data,
     config_path="mapping_config.json",
     trigger="user_mapping"
@@ -138,7 +138,7 @@ print(result)
 **Python:**
 ```python
 # Mapping using configuration file
-result = mapper_instance.map_dic(
+result = mapper_instance.map_dict(
     input_dict=input_data,
     config_path="config_file.json",
     trigger="user_mapping"
@@ -161,7 +161,7 @@ print(result)
 
 ```python
 # Mapping using entire configuration (without specific trigger)
-result = mapper_instance.map_dic(
+result = mapper_instance.map_dict(
     input_dict=input_data,
     config_path="config_file.json"
     # trigger=None (default)
@@ -191,15 +191,15 @@ print(result)
 ```python
 # Use dot as separator
 mapper_dot = mapper(sep=".", parent_key="")
-result_dot = mapper_dot.map_dic(input_data, "config.json", "user_mapping")
+result_dot = mapper_dot.map_dict(input_data, "config.json", "user_mapping")
 
 # Use underscore as separator
 mapper_underscore = mapper(sep="_", parent_key="")
-result_underscore = mapper_underscore.map_dic(input_data, "config.json", "user_mapping")
+result_underscore = mapper_underscore.map_dict(input_data, "config.json", "user_mapping")
 
 # Use slash as separator
 mapper_bar = mapper(sep="/", parent_key="")
-result_bar = mapper_bar.map_dic(input_data, "config.json", "user_mapping")
+result_bar = mapper_bar.map_dict(input_data, "config.json", "user_mapping")
 
 print("Result with dot:", result_dot)
 print("Result with underscore:", result_underscore)
@@ -212,7 +212,7 @@ print("Result with slash:", result_bar)
 # Mapper with parent key "api_data"
 mapper_with_parent = mapper(sep=".", parent_key="api_data")
 
-result_with_parent = mapper_with_parent.map_dic(input_data, "config.json", "user_mapping")
+result_with_parent = mapper_with_parent.map_dict(input_data, "config.json", "user_mapping")
 print("Result with parent key 'api_data':")
 print(result_with_parent)
 ```
@@ -232,7 +232,7 @@ mapper(sep: str = "|", parent_key: str = "")
 
 #### Methods
 
-##### `map_dic(input_dict: dict, config_path: str, trigger: str = None) -> dict`
+##### `map_dict(input_dict: dict, config_path: str, trigger: str = None) -> dict`
 Main method that combines flattening and field mapping.
 
 **Parameters:**
@@ -281,7 +281,7 @@ For support and questions:
 
 ## 🔄 Version History
 
-- **v1.0.4** - Current version with cross-platform support
+- **v1.0.6** - Current version with cross-platform support
 - **v1.0.1** - Performance improvements
 - **v1.0.0** - Initial release
 
